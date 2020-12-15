@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>准备</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                content:'请选择你的英雄',
+                vipHeros: '无限飓风号 嬴政 武则天',
+                isVip: false,
+            }
+        },
+        template: `<div>
+        <div>{{content}}</div>
+        <button v-on:click="makeSureHeroSelect">确认选择</button>&nbsp
+        <button v-on:click="cancleSelect">取消选择</button>
+        <div>
+          <div v-if="isVip">{{vipHeros}}</div>
+          <button v-on:click="showVipHeros">显示/隐藏Vip英雄</button>
+        </div>
+        </div>`,
+        methods: {
+            makeSureHeroSelect() {
+                console.log("英雄确认完毕")
+            },
+            cancleSelect(){
+                console.log("英雄取消选择")
+            },
+            showVipHeros(){
+                this.isVip = !this.isVip
+            },
+        },
+    }).mount("#app")
+</script>
+</html>

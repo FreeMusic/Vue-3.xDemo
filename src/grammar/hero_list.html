@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英雄列表</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                herolist: ['诸葛亮', '关羽', '马超', '黄忠', '赵云'],
+                inputHero:'',
+            }
+        },
+        template: `
+          <ul>
+          <input v-model="inputHero" />
+          <button v-on:click="handleAddHero">添加英雄</button>
+<!--              <li v-for="item of herolist">{{item}}</li>-->
+          <li v-for="(item, index) of herolist">[{{index}}]---[{{item}}]</li>
+          </ul>
+        `,
+        methods:{
+            handleAddHero(){
+                if (this.inputHero.length){
+                    this.herolist.push(this.inputHero)
+                }else{
+                    this.herolist.push("孙尚香")
+                }
+                this.inputHero = ''
+            }
+        },
+    }).mount("#app")
+</script>
+</html>

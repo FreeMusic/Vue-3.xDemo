@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计数器</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script>
+    Vue.createApp({
+        data(){
+            return {counter: 1}
+        },
+
+        /*页面加载完成后-自动执行*/
+        mounted() {
+            console.log('页面加载完成后-自动执行')
+            setInterval(() => {
+                this.counter += 1
+            }, 1000)
+        },
+        template: '<div>{{counter}}</div>'
+    }).mount("#app")
+</script>
+</html>

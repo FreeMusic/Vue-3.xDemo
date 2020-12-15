@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英雄列表</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        setup(){
+            const herolist = ['诸葛亮', '关羽', '马超', '黄忠', '赵云']
+            const inputHero = ''
+
+            return {herolist, inputHero}
+        },
+        // data(){
+        //     return {
+        //         inputHero: '',
+        //         herolist: ['诸葛亮', '关羽', '马超', '黄忠', '赵云'],
+        //     }
+        // },
+        methods: {
+            handleAddHero(){
+                if (this.inputHero.length){
+                    this.herolist.push(this.inputHero)
+                }else{
+                    this.herolist.push("孙尚香")
+                }
+                this.inputHero = ''
+            }
+        },
+        template: `
+                <div>
+                <my-title />
+                <input v-model="inputHero" />
+                <button v-on:click="handleAddHero">添加英雄</button>
+                <ul>
+                  <my-hero
+                      v-for="(item, index) of herolist"
+                      v-bind:item="item"
+                      v-bind:index="index"
+                  />
+                </ul>
+                </div>
+        `
+    })
+
+    app.component('my-title', {
+        template: '<h1 style="text-align: center">王者荣耀</h1>'
+    })
+
+    app.component('my-hero', {
+        props: ['item', 'index'],
+        template: `<li>{{index}}~{{item}}</li>`
+    })
+
+    app.mount("#app")
+
+</script>
+</html>

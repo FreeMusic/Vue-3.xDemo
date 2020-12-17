@@ -1,143 +1,91 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <h1>欢迎来到王者荣耀</h1>
-  <h2>请选择你的英雄</h2>
-  <div>
-    <button v-for="(hero, index) in heros"
-            v-bind:key="index"
-            @click="selectHeroFuction(index)"
-    >
-      {{index}} : {{hero}}
-    </button>
-  </div>
-  <div>你选择了英雄【{{selectHero}}】</div>
-  <div>
-    <button @click="overAction">
-      确定
-    </button>
-    
-  </div>
-  <div>{{overText}}</div>
-  <div>
-    <Suspense>
-      <template #defalut>
-        <asyncShow>
-          <div>{{asyncShow}}</div>
-        </asyncShow>
-      </template>
-      <template #fallback>
-        <h1>加载中...</h1>
-      </template>
-    </Suspense>
+  <div class="view">
+    <div id="nav">
+      <div>
+        <b>Vue3.x+TypeScript</b>
+      </div>
+      <div>
+        <router-link to="/reactiveTryApp">(🍉 ) => Home</router-link>
+      </div>
+      <div>
+        <router-link to="/TimeApp">(🌽 ) => About</router-link>
+      </div>
+      <div>
+        <router-link to="/AppRoot">AppRoot视图</router-link>
+      </div>
+      <div>
+        <router-link to="/Hero">展示英雄</router-link>
+      </div>
+    </div>
+    <div id="content">
+      <router-view />
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-import {toRefs ,defineComponent, reactive, ref,
-        onMounted,
-        onBeforeMount,
-        onBeforeUpdate,
-        onUpdated, watch,
-} from "vue";
-
-interface HeroDataProps {
-  heros: string[];
-  selectHero: string;
-  selectHeroFuction: (index: number) => void;
+<style lang="scss">
+*,
+:after,
+:before {
+  box-sizing: border-box;
 }
-
-export default defineComponent({
-  name:"App",
-  setup(){
-    const herosData: HeroDataProps = reactive({
-      heros : ['鲁班七号', '后羿', '夏侯惇'],
-      selectHero : "",
-      selectHeroFuction : (index: number) => {
-        herosData.selectHero = herosData.heros[index];
-      }
-    });
-
-    const data = toRefs(herosData)
-
-    console.log("1-开始创建组件-------setup");
-
-    onBeforeMount(() => {
-      console.log("2-组件挂载到页面之前执行-------onBeforeMount");
-    });
-
-    onMounted(() => {
-      console.log("3-组件挂载到页面之后执行-------onMounted");
-    });
-
-    onBeforeUpdate(() => {
-      console.log("4-组件更新之前-------onBeforeUpdate");
-    });
-
-    onUpdated(() => {
-      console.log("5-组件更新之后-------onUpdated");
-    });
-
-    const overText = ref("选英雄")
-    const overAction = () => {
-      // overText.value = overText.value + "选择完毕 | "
-      overText.value = "英雄选择完毕"
-      // document.title = overText.value;
-    };
-
-    /*观察单个值*/
-    // watch(overText, (newValue, oldValue) => {
-    //   console.log(`new -> ${newValue}`)
-    //   console.log(`old -> ${oldValue}`)
-    //
-    //   document.title = newValue
-    // });
-
-    /*观察多个对象*/
-    watch([overText, data.selectHero], (newValue, oldValue) => {
-      console.log(`new -> ${newValue}`);
-      console.log(`old -> ${oldValue}`);
-
-      document.title = newValue[0]
-    });
-
-    const asyncShow = new Promise((resolve, reject) => {
-      
-      setTimeout(() => {
-        console.log('asyncShow')
-        return resolve({reslut:"异步"})
-      }, 2000);
-    })
-
-    return {...data, overText, overAction, asyncShow}
-  },
-
-  // /***************Vue2.x版本生命周期函数***************/
-  // beforeCreate() {
-  //   console.log("Vue2.x版本生命周期函数   1-组件创建之前-----beforeCreate()");
-  // },
-  // beforeMount() {
-  //   console.log("Vue2.x版本生命周期函数  2-组件挂载到页面之前执行-----BeforeMount()");
-  // },
-  // mounted() {
-  //   console.log("Vue2.x版本生命周期函数   3-组件挂载到页面之后执行-----Mounted()");
-  // },
-  // beforeUpdate() {
-  //   console.log("Vue2.x版本生命周期函数   4-组件更新之前-----BeforeUpdate()");
-  // },
-  // updated() {
-  //   console.log("Vue2.x版本生命周期函数   5-组件更新之后-----Updated()");
-  // },
-})
-
-</script>
-
-<style>
-#app {
+body {
+  margin: 0;
+  background-color: #040609;
+  color: #92abcf;
+}
+.view {
+  position: relative;
+  min-height: 100vh;
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  // font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  // color: #2c3e50;
+}
+#nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #1d2636;
+  padding: 24px 12px 12px;
+  flex: 0 0 auto;
+  height: 100vh;
+  z-index: 99;
+  div {
+    display: flex;
+    height: 46px;
+    line-height: 46px;
+    color: #92abcf;
+  }
+  a {
+    width: 100%;
+    font-weight: bold;
+    color: #92abcf;
+    text-decoration: none;
+    cursor: pointer;
+    padding-left: 30px;
+    &:hover {
+      color: #11ece5;
+    }
+    &.router-link-exact-active {
+      color: #11ece5;
+      background-color: #2d405d;
+    }
+  }
+}
+#content {
+  position: relative;
+  min-height: 100vh;
+  padding: 20px;
+  width: 100%;
+  padding-left: 230px;
+}
+
+ol,
+ul {
+  list-style: none;
 }
 </style>

@@ -9,6 +9,8 @@
     </button>
   </div>
   <div>你选择了英雄【{{selectHero}}】</div>
+  <div v-if="showMessage">蛤蛤蛤蛤蛤</div>
+<!--  <a v-bind:href="www.baidu.com"> dianwosadsad  </a>-->
 </template>
 
 
@@ -23,7 +25,8 @@ export default defineComponent({
       selectHero : "",
       selectHeroFuction : (index: number) => {
         herosData.selectHero = herosData.heros[index];
-      }
+      },
+      showMessage: false,
     });
     const data = toRefs(herosData)
 

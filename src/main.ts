@@ -1,8 +1,6 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-import TimeApp from "./components/TimeApp.vue";
-import HeroShow from "./components/HeroShow.vue";
-import reactiveTryApp from "./components/reactiveTryApp.vue";
+import router from "@/router";
+import {store} from "@/router/store";
+import App from "./App.vue";
 
-
-createApp(reactiveTryApp).mount('#app')
+createApp(App).use(router).use(store).mount('#app')

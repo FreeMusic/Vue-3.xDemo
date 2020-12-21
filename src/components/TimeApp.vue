@@ -6,9 +6,15 @@
         <button @click="getNowTime">
             显示当前时间
         </button>
+      <span>Message</span>
     </div>
+    <span>Message</span>
     <div v-if="loading">加载中...</div>
     <img v-if="loaded" :src="imageUrl" />
+    <span>15:28:30</span>
+    <span v-once>发生变化</span>
+    <p>鼠标器偶爱你</p>
+
 </template>
 
 <script lang="ts">

@@ -4,7 +4,6 @@ import TimeApp from "@/components/TimeApp.vue";
 import AppRoot from "@/AppRoot.vue";
 import HeroShow from "@/components/HeroShow.vue";
 
-
 const routes: Array<any> = [
     {
         path:"/reactiveTryApp",

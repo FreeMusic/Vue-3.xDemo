@@ -14,6 +14,7 @@
     <span>15:28:30</span>
     <span v-once>发生变化</span>
     <p>鼠标器偶爱你</p>
+    <span v-bind:id="123456">我的ID</span>
 
 </template>
 

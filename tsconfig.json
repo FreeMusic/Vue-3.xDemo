@@ -36,5 +36,10 @@
   ],
   "exclude": [
     "node_modules"
+  ],
+  "no-inferrable-types": [
+    true,
+    "ignore-params",
+    "ignore-properties"
   ]
 }

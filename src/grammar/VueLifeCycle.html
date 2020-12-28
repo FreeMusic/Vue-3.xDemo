@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>这是我们的Demo标题</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                message: 'Vue的生命周期'
+            }
+        },
+        setup(){
+
+        },
+        methods:{
+            handleMessageClick(){
+                alert('主动点击弹出提示框')
+                console.log('点击事件')
+                this.message = (this.message == 'Vue的生命周期' ? '点这里' : 'Vue的生命周期')
+            }
+        },
+        template: "" +
+            "<h2 v-on:click='handleMessageClick'>{{message}}</h2>" +
+            "",
+        mounted() {
+            console.log('在模板渲染完成之后执行的函数')
+            alert('主动弹出提示框')
+        },
+        beforeCreate() {
+            console.log('在实例生成之前会自动执行的函数')
+        },
+        created() {
+            console.log('在实例生成之后会自动执行的函数')
+        },
+        beforeMount() {
+            console.log('在模板渲染完成之前执行的函数')
+        },
+        beforeUpdate() {
+            console.log('数据更新变化之前：' + this.message)
+        },
+        updated() {
+            console.log('数据更新之后：' + this.message)
+        },
+        beforeUnmount() {
+            console.log('Vue 应用失效时，会自动执行该函数')
+        },
+        unmounted() {
+            console.log('当Vue应用失效时，且DOM完全销毁之后，会自动执行')
+        }
+
+    })
+    const vm = app.mount("#app")
+    app.unmount()
+</script>
+
+</html>

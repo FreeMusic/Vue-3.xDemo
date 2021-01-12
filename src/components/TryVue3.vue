@@ -9,7 +9,7 @@
         setup(){
             const heros = ref(['鲁班七号', '后羿', '夏侯惇']);
             const selectHero = ref("");
-            const selectHeroFuction = (index:number) => {
+            const selectHeroFuction = (index: number) => {
                 selectHero.value = this.heros.value[index];
             };
 

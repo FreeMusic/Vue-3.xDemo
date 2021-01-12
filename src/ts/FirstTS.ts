@@ -13,7 +13,7 @@ enum Season {
     winter
 }
 
-var unkown: any = 10
+let unkown: any = 10
 unkown = '字符创'
 unkown = false
 
@@ -34,7 +34,7 @@ function introduceYourSelf(age: number, name: string): string {
     return '大家好，我叫' + name + '，今年' + age + '岁了。'
 }
 
-var age:number = 18
-var name: string = '小白'
-var result: string = introduceYourSelf(age, name)
+const age = 18
+const name = '小白'
+const result: string = introduceYourSelf(age, name)
 console.log(result)

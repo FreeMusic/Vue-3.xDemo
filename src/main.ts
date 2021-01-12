@@ -237,3 +237,17 @@ console.log(search('高、富、帅、德','胖'))
 //
 // shuaiDehua.talk()
 // bJDehua.talk()
+
+/*静态类型*/
+const myAge:number = 18;
+console.log(myAge)
+
+interface LuBanQiHao {
+    name: string;
+    age: number;
+}
+
+const myLB: LuBanQiHao = {
+    name:"鲁班七号",
+    age:40,
+}

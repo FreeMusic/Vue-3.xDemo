@@ -16,6 +16,9 @@
       <div>
         <router-link to="/Hero">展示英雄</router-link>
       </div>
+      <div>
+        <router-link to="/Vue2TryApp">Vue2.x版本语法</router-link>
+      </div>
     </div>
     <div id="content">
       <router-view />

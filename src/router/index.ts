@@ -3,6 +3,7 @@ import reactiveTryApp from "@/components/reactiveTryApp.vue";
 import TimeApp from "@/components/TimeApp.vue";
 import AppRoot from "@/AppRoot.vue";
 import HeroShow from "@/components/HeroShow.vue";
+import Vue2TryApp from "@/components/Vue2TryApp.vue"
 
 const routes: Array<any> = [
     {
@@ -24,6 +25,11 @@ const routes: Array<any> = [
         path: "/Hero",
         name: "Hero",
         component: HeroShow
+    },
+    {
+        path: "/Vue2TryApp",
+        name: "Vue2TryApp",
+        component: Vue2TryApp
     }
 ];
 

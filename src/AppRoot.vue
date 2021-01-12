@@ -84,7 +84,7 @@ export default defineComponent({
       // document.title = overText.value;
     };
 
-    /*观察单个值*/
+    // /*观察单个值*/
     // watch(overText, (newValue, oldValue) => {
     //   console.log(`new -> ${newValue}`)
     //   console.log(`old -> ${oldValue}`)
@@ -111,6 +111,11 @@ export default defineComponent({
     return {...data, overText, overAction, asyncShow}
   },
 
+//   beforeDestroy -> onBeforeUnmount
+// destroyed     -> onUnmounted
+// activated     -> onActivated
+// deactivated   -> onDeactivated
+// errorCaptured -> onErrorCaptured
   // /***************Vue2.x版本生命周期函数***************/
   // beforeCreate() {
   //   console.log("Vue2.x版本生命周期函数   1-组件创建之前-----beforeCreate()");

@@ -190,3 +190,50 @@ class SuperHero extends Hero{
 const superHero = new SuperHero('剑圣', 45, '💊', '喜事', '祖上富有')
 superHero.superOptions()
 superHero.optoions()
+
+/*接口*/
+interface ChineseObject{
+    sex: string;
+    interest: string;
+    maiBB?: boolean;
+}
+
+//
+const yourObject: ChineseObject ={sex: '女', interest: '打游戏', maiBB: true};
+console.log(yourObject)
+
+//接口规范化
+interface SearchObject{
+    (source: string, subString: string): boolean;
+}
+
+const search: SearchObject = function (source: string, subString: string): boolean{
+    const flag = source.search(subString)
+    return (flag != -1)
+}
+console.log(search('高、富、帅、德','胖'))
+
+/*命名空间*/
+// namespace shuaiGe {
+//     export class Dehua {
+//         name = '刘德华'
+//         talk(){
+//             console.log('我是帅哥刘德华')
+//         }
+//     }
+// }
+//
+// namespace bajie {
+//     export class Dehua{
+//         name = '马德华'
+//         talk(){
+//             console.log('我是八戒马德华')
+//         }
+//     }
+// }
+//
+// const shuaiDehua = new shuaiGe.Dehua()
+// const bJDehua = new bajie.Dehua()
+//
+// shuaiDehua.talk()
+// bJDehua.talk()

@@ -1,13 +1,10 @@
 import vue from "vue";
 
-var name: string = '字符串'
-console.log(name)
+class FirstTS {
 
-enum PersonSex  {
-    man = '男',
-    woman = '女',
-    unkown = '人妖'
 }
+
+
 
 enum Season {
     spring,

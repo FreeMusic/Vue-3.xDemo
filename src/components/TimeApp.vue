@@ -21,7 +21,7 @@
 <script lang="ts">
     import {nowTime, getNowTime} from "../hooks/time_utils";
     import requestGet from "../hooks/net_work_util";
-
+    import {ShuaiGe, Bajie} from "../ts/Done";
 
     export default {
         name: "TimeApp",
@@ -31,6 +31,13 @@
             );
             const imageUrl = "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1705581946,4177791147&fm=26&gp=0.jpg";
             console.log("********************")
+
+            const deHua = new ShuaiGe.Dehua()
+            deHua.talk();
+
+            const bajie = new Bajie.Dehua()
+            bajie.talk()
+
             return{nowTime, getNowTime,
                 requestResult, loading, loaded, imageUrl,
             };

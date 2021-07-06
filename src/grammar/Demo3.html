@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo03</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+
+        data(){
+            return {
+                nickname: '乐逍遥鼎泰传值',
+                jockName: 123,
+                choose:()=>{
+                    alert('你让我选谁')
+                }
+            }
+        },
+
+        template:`
+                <h2>乐逍遥</h2>
+                <Son name="乐逍遥静态传值"></Son>
+                <Hero v-bind:name="nickname"></Hero>
+                <Hero :name="jockName"></Hero>
+                <selectChoice :choose="choose"></selectChoice>
+            `
+    })
+
+    //父组件向子组件传值 静态传参只能传String类型
+    app.component('Son', {
+        props: ['name'],
+        template: `<div>{{name}} Div</div>`
+    })
+
+    //动态传参能穿多种类型 一个函数方法
+    app.component('Hero', {
+        props: ['name'],
+        template: `<div>{{name}}</div>`
+    })
+
+    //参数为函数
+    app.component('selectChoice', {
+        props: ['choose'],
+        methods: {
+            handleChoose(){
+                alert('快点选')
+                this.choose()
+            }
+        },
+        template:`
+            <div @click="this.handleChoose">快去选</div>
+        `
+    })
+
+    const vm= app.mount("#app")
+</script>
+</html>

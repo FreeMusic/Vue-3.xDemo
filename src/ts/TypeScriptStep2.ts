@@ -1,3 +1,5 @@
+import { createApp } from 'vue'
+
 /***************类和概念的使用**************/
 class Hero {
     content = "hello";

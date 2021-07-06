@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app"></div>
+</body>
+
+<script>
+    const app=Vue.createApp({
+        template:`
+        <website />
+        `
+    })
+    app.component('website', {
+        template:`
+        <h2>乐逍遥</h2>
+        <div>这是我的网页</div>
+        `
+    })
+    const vm=app.mount("#app")
+</script>
+</html>

@@ -1,0 +1,59 @@
+
+<!--组件传值的验证-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo04</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                name: '123',
+                pay:()=>{
+                    alert('翻墙')
+                },
+                checkValue:'dsdsfds'
+            }
+        },
+        template: `
+                <h2>AAAAAAAAAA</h2>
+                <Son :money="name"></Son>
+                <Son></Son>
+                <Son :checkII="checkValue"></Son>
+        `
+    })
+
+    app.component('Son', {
+        props: {
+            name: String,
+            money: {
+                type: String,
+                // require: true
+                default: 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890'
+            },
+            checkII:{
+                type: String,
+                validator: function (value) {
+                    console.log(value.search("qwer1234"))
+                    return value.search('qwer1234') != -1
+                },
+                default: '理想型'
+            }
+        },
+        template: `
+                <div>{{ money }} div</div>
+                <div>{{ checkII }} div</div>
+        `
+    })
+
+    const vm = app.mount("#app")
+</script>
+</html>

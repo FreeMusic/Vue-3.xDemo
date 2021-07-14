@@ -1,0 +1,37 @@
+<!--插槽-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo10</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+
+<body>
+<div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        template: `
+            <h2>欢迎光临</h2>
+            <list></list>
+`
+    })
+
+    app.component('List', {
+        data(){
+            return {list: ['1号选手', '2号选手', '3号选手']}
+        },
+        template: `
+                <div v-for="item in list" :item="item">
+
+                </div>
+        `
+    })
+
+    const vm = app.mount("#app")
+</script>

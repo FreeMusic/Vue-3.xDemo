@@ -1,0 +1,51 @@
+<!--插槽(Slot)使用-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo08</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+
+<body>
+<div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                hero: '公关稿'
+            }
+        },
+        template: `
+                <h2>欢迎光临-请选择操作</h2>
+                <Hero><div style="color: red; font-size: 50px">啊飒飒, {{hero}},<project/></div></Hero>
+                <Hero><div style="color: green; font-size: 50px">大三大四多</div></Hero>
+        `
+    })
+
+    app.component('Hero', {
+        data(){
+            return {
+                hero: '111111'
+            }
+        },
+        template: `
+                    <div>
+                        <span>经过你的慎重考虑，最终选择了</span>
+                        <span><slot></slot></span>
+                    </div>
+        `
+    })
+
+    app.component('project', {
+        template: `<span style="color: #11ece5">是否是打算范德萨发顺丰</span>`
+    })
+
+    const vm = app.mount("#app")
+</script>
+
+</html>

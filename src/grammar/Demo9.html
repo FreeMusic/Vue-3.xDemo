@@ -1,0 +1,52 @@
+<!--插槽-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo09</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+
+<body>
+<div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        template: ` <h2>欢迎光临</h2>
+                    <Hero></Hero>
+                    <Play></Play>
+                    <PlayJoke>
+                        <template v-slot:one><div>1.谁买的小米</div></template>
+                        <template v-slot:two><div>1.菠菜贱卖</div></template>
+                    </PlayJoke>
+`
+    })
+
+    app.component('Hero', {
+        template: `<div>你选择了<slot><span style="color: red">李白</span></slot>出战</div>`
+    })
+
+    app.component('Play', {
+        template: `<div>
+                        <div>1技能</div>
+                        <div>2技能</div>
+                        <div>3技能</div>
+                    </div>`
+    })
+
+    app.component('PlayJoke', {
+        template: `
+        <div>
+            <slot name="one"></slot>
+            <div>2.你选中了鲁班七号</div>
+            <slot name="two"></slot>
+        </div>
+        `
+    })
+
+    const vm = app.mount("#app")
+</script>

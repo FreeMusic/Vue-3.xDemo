@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09</title>
+    <style>
+        .v-enter-to,
+        .v-leave-to {
+            opacity: 0;
+        }
+
+        .v-enter-to,
+        .v-leave-from {
+            opacity: 1;
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: opacity 2s ease-in;
+        }
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+
+<script>
+    const DJ = {
+        template: `<div>DJ进入了房间</div>`
+    }
+
+    const AJ = {
+        template: `<div>AJ进入了房间</div>`
+    }
+    const app = Vue.createApp({
+        data(){
+            return {
+                component: 'da-jiao'
+            }
+        },
+        methods:{
+            handleClick(){
+                this.component = (this.component == 'da-jiao' ? 'a-jiao' : 'da-jiao')
+            }
+        },
+        components: {
+            'da-jiao': DJ,
+            'a-jiao': AJ
+        },
+        template: `
+                <transition mode="out-in" appear>
+                    <component :is="component"/>
+                </transition>
+                <button @click="handleClick">切换动画</button>
+        `
+    })
+    const vm = app.mount("#app")
+</script>
+</html>

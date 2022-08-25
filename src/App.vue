@@ -19,6 +19,9 @@
       <div>
         <router-link to="/Vue2TryApp">Vue2.x版本语法</router-link>
       </div>
+      <div>
+        <router-link to="/animation">动画部分</router-link>
+      </div>
     </div>
     <div id="content">
       <router-view />

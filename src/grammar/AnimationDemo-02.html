@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画02</title>
+    <style>
+        .transition {
+            transition: 3s background-color ease-in-out;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+
+<body>
+<div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                css: {
+                    transition: true,
+                    red: true,
+                    yellow: true,
+                }
+            }
+        },
+        methods: {
+            handleClick(){
+                this.css.red = !this.css.red
+                this.css.yellow = !this.css.yellow
+            }
+        },
+        template: `
+            <div :class="css">来源：技术胖</div>
+            <div>
+                <button @click="handleClick">
+                    切换颜色
+                </button>
+            </div>
+        `
+    })
+    const vm = app.mount("#app")
+</script>

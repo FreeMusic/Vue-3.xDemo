@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo07</title>
+    <style>
+
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+
+<body>
+<div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {isShow: false}
+        },
+        methods:{
+            handleClick(){
+                this.isShow = !this.isShow
+            },
+            handleBeforeEnter(element){
+                element.style.color = 'red'
+            },
+            handleEnterActive(element, done){
+                const interval = setInterval(()=>{
+                    const color = element.style.color;
+                    if (color == 'red') {
+                        element.style.color = 'green'
+                    }else{
+                        element.style.color = 'red'
+                    }
+                }, 500)
+                setTimeout(()=>{
+                    clearInterval(interval)
+                    done()
+                }, 2000)
+            },
+            handleEnterEnd(){
+                alert('哈哈啊哈哈哈')
+            }
+        },
+        template: `
+                <transition :css="false"
+                            @before-enter="handleBeforeEnter"
+                            @enter="handleEnterActive"
+                            @after-enter="handleEnterEnd"
+                >
+                    <div v-if="isShow">技术胖讲程序</div>
+                </transition>
+                <div>
+                    <button @click="handleClick">
+                        切换动画
+                    </button>
+                </div>
+        `
+    })
+    const vm = app.mount("#app")
+</script>

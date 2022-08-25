@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05</title>
+    <style>
+        @keyframes comeIn {
+            0% {
+                transform: translateX(-120px);
+            }
+
+            100% {
+                transform: translateX(0px);
+            }
+        }
+
+        @keyframes comeOut {
+            0% {
+                transform: translateX(0px);
+            }
+            100% {
+                transform: translateX(-120px);
+            }
+        }
+
+        .xyAnimation-enter-active{
+            animation: comeIn 1s;
+        }
+
+        .xyAnimation-leave-active {
+            animation: comeOut 1s;
+        }
+
+        .come{
+            animation: comeIn 1s;
+        }
+        .go{
+            animation: comeOut 1s;
+        }
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+
+<body>
+<div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {isShow: false}
+        },
+        methods: {
+          hanleClick(){
+              this.isShow = !this.isShow
+          }
+        },
+        template: `
+            <transition name="xyAnimation">
+                <div v-if="isShow">技术胖讲程序</div>
+            </transition>
+            <transition enter-active-class="come"
+                        leave-active-class="go"
+            >
+                <div v-if="isShow">技术胖讲程序</div>
+            </transition>
+            <transition
+                    enter-active-class="animate__animated animate__bounce"
+                    leave-active-class="animate__animated animate__bounce"
+            >
+                <div v-if="isShow">技术胖讲程序</div>
+            </transition>
+            <!--https://animate.style-->
+            <transition
+                    enter-active-class="animate__animated animate__flash"
+                    leave-active-class="animate__animated animate__flash"
+            >
+                <div v-if="isShow">技术胖讲程序</div>
+            </transition>
+            <transition
+                    enter-active-class="animate__animated animate__heartBeat"
+                    leave-active-class="animate__animated animate__heartBeat"
+            >
+                <div v-if="isShow">技术胖讲程序</div>
+            </transition>
+            <transition
+                    enter-active-class="animate__animated animate__flipOutX animate__delay-5s"
+                    leave-active-class="animate__animated animate__rotateIn animate__delay-5s"
+            >
+                <div v-if="isShow">技术胖讲程序</div>
+            </transition>
+            <button @click="hanleClick">切换动画</button>
+        `
+    })
+    const vm = app.mount("#app")
+</script>

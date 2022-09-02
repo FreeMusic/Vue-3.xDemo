@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="count++">加1</button>
+        <p>这个按钮被点击了{{count}}次</p>
+        <a v-on:click.stop="greet"></a>
+        <button @click="greet">greet</button>
+        <button @click="say('丰富')">
+            diandiandiand
+        </button>
+        <button @click="first($event), second($event)">多个事件处理</button>
+        <!--组织单击事件冒泡-->
+        <a v-on:click.stop="doThis"></a>
+    </div>
+
+    <script>
+        const app = {
+            data(){
+                return {
+                    count: 0,
+                    name: 'Runoob',
+                }
+            },
+            methods: {
+                greet(event) {
+                    alert('Hello' + this.name + '!')
+                    if (event) {
+                        alert(event.target.tagName)
+                    }
+                },
+                say(message){
+                    alert(message)
+                },
+                first(event){
+                    alert('第一个时间处理')
+                },
+                second(event){
+                    alert('第二个时间处理')
+                }
+            },
+        }
+        vm = Vue.createApp(app).mount('#app')
+    </script>
+
+</body>
+</html>

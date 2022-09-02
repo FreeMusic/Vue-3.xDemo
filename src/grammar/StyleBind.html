@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .active {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        .static {
+            width: 100px;
+            height: 100px;
+        }
+        .back-color {
+            background: red;
+        }
+        .text-danger {
+            background: aqua;
+        }
+        .computedActive {
+            width: 100px;
+            height: 100px;
+            background: deeppink;
+        }
+        .classObjectActive {
+            background: chocolate;
+        }
+        .activeClassConfig {
+            background: gray;
+        }
+        .errorClassConfig {
+            background: black;
+        }
+        .classA {
+            color: red;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <div :class="{ 'active': show }"></div>
+        <ul>
+            <div class="static" :class="{'active': isActive, 'text-danger': hasError}">
+
+            </div>
+        </ul>
+        <ul>
+            <div class="static" :class="classObject">
+
+            </div>
+        </ul>
+        <ul>
+            <div class="static" :class="computedClassObject">
+
+            </div>
+        </ul>
+        <ul>
+            <div class="static" :class="[errorClass, activeClass, ]"></div>
+        </ul>
+        <ul>
+            <div class="static" :class="[showBindObject ? activeClass : '']"></div>
+        </ul>
+        <ul>
+            <div :style="{ color: activeColor, fontSize: fontSize+'px' }">哈哈哈哈</div>
+        </ul>
+        <ul><div :style="styleObject">菜鸟教程</div></ul>
+        <ul><div :style="[baseStyle, overridingStyles]">菜鸟教程</div></ul>
+        <ul><jx-view></jx-view></ul>
+        <ul><ax-view class="classA"></ax-view></ul>
+    </div>
+
+    <script>
+        const app = {
+            data(){
+                return {
+                    show: true,
+                    isActive: false,
+                    hasError: true,
+                    classObject: {
+                        'active': false,
+                        'classObjectActive': true,
+                    },
+                    showBindObject: true,
+                    error: null,
+                    activeClass: 'activeClassConfig',
+                    errorClass: 'errorClassConfig',
+                    activeColor: 'red',
+                    fontSize: 26,
+                    styleObject: {
+                        color: 'red',
+                        fontSize: '30px',
+                    },
+                    baseStyle: {
+                        color: 'green',
+                        fontSize: '30px',
+                    },
+                    overridingStyles: {
+                        'font-weight': 'bold'
+                    }
+                }
+            },
+            computed: {
+                computedClassObject(){
+                    return {
+                        computedActive: this.showBindObject && !this.error,
+                        'text-danger': this.error && this.error.type === 'fatal'
+                    }
+                }
+            },
+            components:{
+                'jx-view': {template: '<h1>I like runoob!</h1>'},
+                'ax-view': {template: `
+                    <p :class="$attrs.class">IT is it</p>
+                    <span>这是一个子组件</span>
+                `}
+            },
+        }
+        const vueApp = Vue.createApp(app)
+        // 定义一个名为 runoob的新全局组件
+        vm = vueApp.mount('#app')
+    </script>
+
+</body>
+</html>

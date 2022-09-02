@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+
+    <div id="app">
+
+    </div>
+
+    <script type="text/javascript">
+
+        const myMix = {
+            data(){
+                return {
+                    message: 'hello',
+                    jump: 'mountHigh'
+                }
+            }
+        }
+
+        const app = Vue.createApp({
+            myOption: 'hello!',
+            // mixins: [myMix],
+            // data(){
+            //     return {
+            //         message: '再见',
+            //         food: 'noddle'
+            //     }
+            // },
+            // created() {
+            //     document.write(JSON.stringify(this.$data))
+            // }
+        })
+
+        app.mixin({
+            created(): void {
+                const myOption = this.$options.myOption
+                if (myOption){
+                    document.write(myOption)
+                }
+            }
+        })
+
+        vm = app.mount('#app')
+    </script>
+
+</body>
+</html>

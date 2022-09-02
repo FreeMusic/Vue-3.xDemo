@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/vue/3.2.36/vue.global.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <runoob></runoob>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <runoob-a></runoob-a>
+        <site-name title="Google"></site-name>
+        <site-name title="Google"></site-name>
+        <site-name title="Google"></site-name>
+        <site-info v-for="site in sites" :id="site.id"
+                   :title="site.title">
+
+        </site-info>
+    </div>
+
+    <script>
+
+        import Vue from "../shims-vue";
+
+        var runoobA = {
+            template: '<h1>自定义组件A</h1>'
+        }
+
+
+        const app = Vue.createApp({
+            data(){
+                return {
+                    sites: [
+                        { id: 1, title: 'Google' },
+                        { id: 2, title: 'Runoob' },
+                        { id: 3, title: 'Taobao' }
+                    ]
+                }
+            },
+            components: {
+                'runoob-a': runoobA
+            }
+        })
+        app.component('runoob', {
+            template: `<h1>自定义组件</h1>`
+        })
+
+        app.component('button-counter', {
+            data(){
+              return {count: 0}
+            },
+            template: `
+                    <button @click="count++">
+                        点了{{count}}次！
+                    </button>
+            `
+        })
+
+        app.component('site-name', {
+            props: ['title'],
+            template: `<h4>{{title}}</h4>`
+        })
+
+        app.component('site-info', {
+            props: ['id', 'title'],
+            template: `<h4>{{id}}  -  {{title}}</h4>`
+        })
+
+        Vue.component('my-component', {
+            props: {
+                //基础的类型检查(null 和 undefined 会通过任何类型的验证)
+                propA: Number,
+                //多个可能的类型
+                propB: [String, Number],
+                //必填字符串
+                propC: {type: String, required: true},
+                //带有默认的数字
+                propD: {type: Number, default: 100},
+                //带有默认值的对象
+                propE:{
+                    type: Object,
+                    //对象或数组默认值必须从一个工厂函数获取
+                    default: function () {
+                        return {message: 'hello'}
+                    }
+                },
+                //自定义验证函数
+                propF:{
+                    validator: function (value) {
+                        //这个值必须匹配下列字符串中的一个
+                        return ['cat', 'dog', 'tiger', 'lion'].indexOf(value) !== -1
+                    }
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+
+</body>
+</html>

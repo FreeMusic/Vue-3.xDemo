@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+
+    <div id="app">
+        <p>input元素</p>
+        <input v-model="message" placeholder="编辑">
+        <p>input表单的消息是: {{message}}</p>
+
+        <p>textarea元素:</p>
+        <textarea v-model="message2" placeholder="多行文本输入"></textarea>
+        <p>textarea 表单消息是:</p>
+        <p style="white-space: pre">{{message2}}</p>
+
+        <ul>
+            <p>单个复选框:</p>
+            <input type="checkbox" id="checkbox" v-model="checked">
+            <label for="checkbox">{{checked}}</label>
+
+            <p>多个复选框：</p>
+            <input type="checkbox" id="runoob" value="Runoob" v-model="checkedNames">
+            <label for="runoob">Runoob</label>
+            <input type="checkbox" id="google" value="Google" v-model="checkedNames">
+            <label for="google">Google</label>
+            <input type="checkbox" id="taobao" value="Taobao" v-model="checkedNames">
+            <label for="taobao">Taobao</label>
+            <br>
+            <span>选择的值为: {{checkedNames}}</span>
+        </ul>
+        <ul>
+            <input type="radio" id="jx-runoob" value="Runoob" v-model="picked">
+            <label for="jx-runoob">Runoob</label>
+            <br>
+            <input type="radio" id="jx-google" value="Google" v-model="picked">
+            <label for="google">Google</label>
+            <br>
+            <input type="radio" id="jx-taobao" value="Taobao" v-model="picked">
+            <label for="google">Taobao</label>
+            <br>
+            <span>选中的值为:{{picked}}</span>
+        </ul>
+        <ul>
+            <p>选择一个网站:</p>
+            <select v-model="selected" name="site">
+                <option value="www.runoob.com">Runoob</option>
+                <option value="www.baidu.com">Baidu</option>
+            </select>
+            <div id="output">选择的是：{{selected}}</div>
+        </ul>
+        <ul>
+            <p>选择一个网站:</p>
+            <select v-model="multSelcted" name="orange" multiple>
+                <option value="www.runoob.com">Runoob</option>
+                <option value="www.baidu.com">Baidu</option>
+                <option value="www.google.com">Google</option>
+                <option value="www.taobao.com">Taobao</option>
+            </select>
+            <div id="jx-output">选择的是：{{multSelcted}}</div>
+        </ul>
+        <ul>
+            <select v-model="justselected">
+                <option v-for="option in options" :value="option.value">
+                    {{option.text}}
+                </option>
+            </select>
+            <span>选择的是: {{ justselected }}</span>
+        </ul>
+        <input v-model.number="message2">
+    </div>
+
+    <script>
+        const app = {
+            data(){
+                return {
+                    message: '',
+                    message2: '菜鸟教程\r\nhttp://www.runoob.com',
+                    checked: false,
+                    checkedNames: [],
+                    picked: 'Runoob',
+                    selected: '',
+                    multSelcted: '',
+                    justselected: 'www.runoob.com',
+                    options: [
+                        {text: 'Runoob', value: 'www.runoob.com'},
+                        {text: 'Google', value: 'www.google.com'},
+                        {text: 'Taobao', value: 'www.taobao.com'},
+                    ],
+                }
+            }
+        }
+        vm = Vue.createApp(app).mount('#app')
+    </script>
+
+</body>
+</html>

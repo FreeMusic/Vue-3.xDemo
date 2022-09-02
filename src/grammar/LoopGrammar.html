@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/vue/3.2.36/vue.global.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <ol>
+            <li v-for="site in sites">
+                {{ site.text }}
+                {{ '文字' }}
+            </li>
+        </ol>
+        <ul>
+            <template v-for="site in sites">
+                <li>{{site.text}}</li>
+                <li>{{'文字'}}</li>
+            </template>
+            <li v-for="value in object">
+                {{value}}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="(value, key) in keyValues">
+                {{key}} : {{value}}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="(newValue, newKey, newIndex) in keyValues">
+                {{newIndex}}. {{newKey}} : {{newValue}}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="n in 5">
+                {{n}}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="n in evenNumbers">
+                {{n}}
+            </li>
+        </ul>
+
+        <select @change="changeValue($event)" v-model="selOption">
+            <template v-for="(site, index) in playSites" :site="site"
+            :index="index" :key="site.id">
+                <option v-if="index == 1" :value="site.name" selected>{{site.name}}</option>
+                <option v-else :value="site.name">{{site.name}}</option>
+            </template>
+        </select>
+        <div>选中了:{{selOption}}</div>
+
+        <form v-on:submit.prevent="addNewTodo">
+            <label for="new-todo">添加 TODO</label>
+            <input v-model="newTodoText" id="new-todo"
+            placeholder="例如：明天早上跑步"/>
+            <button>添加</button>
+        </form>
+        <ul>
+            <todo-item
+                    v-for="(todo, index) in todos"
+                    :key="todo.id"
+                    :title="todo.title"
+                    @remove="todos.splice(index, 1)"
+            >
+
+            </todo-item>
+        </ul>
+
+    </div>
+
+    <script>
+        const app = {
+            data(){
+                return {
+                    sites: [
+                        {text: 'Google'},
+                        {text: 'Runoob'},
+                        {text: 'TaoBao'}
+                    ],
+                    object: {
+                        name: '菜鸟教程',
+                        url: 'http://www.runoob.com',
+                        slogan: '学的不仅是技术，更是梦想！'
+                    },
+                    keyValues: {
+                        name: '菜鸟教程',
+                        url: 'http://www.runoob.com',
+                        slogan: '学的不仅是技术，更是梦想！'
+                    },
+                    numbers: [1, 2, 3, 4, 5],
+                    selOption: "Runoob",
+                    playSites: [
+                        {id:1,name:"Google"},
+                        {id:2,name:"Runoob"},
+                        {id:3,name:"Taobao"},
+                    ],
+                    newTodoText: '',
+                    todos: [
+                        {id: 1, title: '看电影'},
+                        {id: 2, title: '吃饭'},
+                        {id: 3, title: '学习'},
+                    ],
+                    nextTodoId: 4,
+                }
+            },
+            computed: {
+                evenNumbers(){
+                    return this.numbers.filter(number => number % 2 === 1)
+                }
+            },
+            methods:{
+                changeValue: function (event) {
+                    this.selOption = event.target.value
+                    alert("你选中了"+this.selOption)
+                },
+
+                addNewTodo(){
+                    this.todos.push(
+                        {id: this.nextTodoId++, title: this.newTodoText}
+                    )
+                    this.newTodoText = '';
+                }
+            }
+        }
+
+        const myApp = Vue.createApp(app)
+        myApp.component('todo-item', {
+            template: `
+            <li>
+                {{title}}
+                <button @click="$emit('remove')">删除</button>
+            </li>
+            `,
+            props: ['title'],
+            emits: ['remove']
+        })
+        myApp.mount('#app')
+    </script>
+
+</body>
+</html>

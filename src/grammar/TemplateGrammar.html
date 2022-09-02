@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/vue/3.2.36/vue.global.min.js"></script>
+    <style>
+        .class1{
+            background-color: #11ece5;
+            color: coral;
+        }
+    </style>
+</head>
+<body>
+    <div id="example1" class="demo">
+        <p>使用双大括号的文本插值: {{ rawHtml }}</p>
+        <p>使用 v-html 指令: <span v-html="rawHtml"></span></p>
+    </div>
+
+    <div id="hello-vue" class="demo">
+        {{ message }}
+    </div>
+
+    <div id="changeColorApp">
+        <label for="r1">修改颜色</label><input type="checkbox" v-model="use" id="r1">
+        <br><br>
+        <div v-bind:class="{'class1': use}">
+            v-bind:class指令
+        </div>
+    </div>
+
+    <div id="app1">
+        {{5+5}}<br>
+        {{ ok ? 'YES' : 'NO' }}<br>
+        {{ message.split('').reverse().join('') }}
+        <div v-bind:id="'list-' + id">菜鸟教程</div>
+    </div>
+
+    <div id="seenApp">
+        <p v-if="seen">现在你看到我了</p>
+    </div>
+
+    <div id="liApp">
+        <ol>
+            <li v-for="site in sites">
+                {{ site.text }}
+            </li>
+        </ol>
+    </div>
+
+    <div id="responseLinkApp">
+        <p><a v-bind:href="url">菜鸟链接地址</a></p>
+    </div>
+
+    <div id="inputApp">
+        <p>{{ inputMessage }}</p>
+        <input v-model="inputMessage">
+    </div>
+
+    <div id="turnOffApp">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessageString">反转字符串</button>
+    </div>
+
+    <script>
+        const app = {
+            data() {
+                return {
+                    rawHtml: '<span style="color: red">这里会显示红色！</span>'
+                }
+            }
+        }
+        Vue.createApp(app).mount('#example1')
+
+
+        const HelloVueApp = {
+            data(){
+                return {message: 'Hello Vue!!'}
+            },
+
+        }
+        Vue.createApp(HelloVueApp).mount('#hello-vue')
+
+
+        const changeColorApp = {
+            data(){
+                return {use: false}
+            }
+        }
+        Vue.createApp(changeColorApp).mount('#changeColorApp')
+
+
+        const app1 = {
+            data(){
+                return {
+                    ok: false,
+                    message: '哈哈哈',
+                    id: 1
+                }
+            }
+        }
+        Vue.createApp(app1).mount('#app1')
+
+
+        const seenApp = {
+            data(){
+                return {seen: true}
+            }
+        }
+        Vue.createApp(seenApp).mount('#seenApp')
+
+
+        const liApp = {
+            data(){
+                return {
+                    sites: [
+                        {text: 'Google'},
+                        {text: 'Apple'},
+                        {text: 'Alibaba'},
+                    ]
+                }
+            }
+        }
+        Vue.createApp(liApp).mount('#liApp')
+
+        const responseLinkApp = {
+            data(){
+                return {
+                    url: 'http://www.runoob.com'
+                }
+            }
+        }
+        Vue.createApp(responseLinkApp).mount('#responseLinkApp')
+
+
+        const inputApp = {
+            data(){
+                return {inputMessage: '菜鸟驿站'}
+            }
+        }
+        Vue.createApp(inputApp).mount('#inputApp')
+
+
+        const turnOffApp = {
+            data(){
+                return {message: 'Runoob!'}
+            },
+            methods: {
+                reverseMessageString(){
+                    this.message = this.message
+                    .split('')
+                    .reverse()
+                    .join('')
+                }
+            }
+        }
+        Vue.createApp(turnOffApp).mount('#turnOffApp')
+
+
+
+    </script>
+</body>
+</html>

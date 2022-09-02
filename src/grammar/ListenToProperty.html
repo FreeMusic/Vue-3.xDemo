@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.staticfile.org/axios/0.27.2/axios.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/3.2.37/vue.global.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <p style="font-size: 25px; color: red">
+            计数器: {{counter}}
+        </p>
+        <button @click="counter++" style="font-size: 25px">
+            点我
+        </button>
+        <ul>
+            千米: <input type="text" v-model="kilometers">
+            米: <input type="text" v-model="meters">
+        </ul>
+        <ul>
+            <p>
+                输入一个问题,以？号结尾输出答案：
+                <input v-model="question">
+            </p>
+            <p>{{answer}}</p>
+        </ul>
+    </div>
+    <p id="info"></p>
+    <script>
+        const app = {
+            data(){
+                return {
+                    counter: 1,
+                    kilometers: 0,
+                    meters: 0,
+                    question: '',
+                    answer: '每个问题结尾需要输入?号',
+                }
+            },
+
+            watch: {
+                kilometers: function (value) {
+                    this.kilometers = value
+                    this.meters = this.kilometers * 1000
+                },
+                meters: function (value) {
+                    this.kilometers = value / 1000;
+                    this.meters = value;
+                },
+                question: function (newQ, oldQ) {
+                    if (newQ.indexOf('?') > -1 || newQ.indexOf('？') > -1) {
+                        this.getAnswer()
+                    }
+                }
+            },
+
+            methods: {
+                getAnswer(){
+                    this.answer = '加载中...'
+                    axios
+                    .get('/try/ajax/json_vuetest.php')
+                    .then(response =>{
+                        this.answer = response.data.answer
+                    })
+                    .catch(error =>{
+                        this.answer = '错误! 无法访问 API。' + '********' + error
+                    })
+                }
+            }
+        }
+        vm = Vue.createApp(app).mount('#app')
+        vm.$watch('counter', function (newValue, oldValue) {
+            alert('计数器变化: ' + oldValue + ' 变为 ' + newValue)
+        })
+        vm.$watch('kilometers', function (newValue, oldValue) {
+            document.getElementById("info").innerHTML = "修改前值为：" + oldValue + ", 修改后值为：" + newValue;
+        })
+    </script>
+
+</body>
+</html>

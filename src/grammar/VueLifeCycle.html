@@ -30,7 +30,7 @@
             "<h2 v-on:click='handleMessageClick'>{{message}}</h2>" +
             "",
         mounted() {
-            console.log('在模板渲染完成之后执行的函数')
+            console.log('mounted')
             alert('主动弹出提示框')
         },
         beforeCreate() {

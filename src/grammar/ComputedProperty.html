@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <p>原始字符串: {{ message }}</p>
+    <p>使用 computed 计算后反转字符串: {{ reversedMessage }}</p>
+    <p>使用 methods 计算后反转字符串: {{ reversedMessageMethod() }}</p>
+</div>
+
+<script>
+    const app = {
+        data() {
+            return {
+                message: 'RUNOOB!!',
+                name: 'Google',
+                url: 'http://www.google.com'
+            }
+        },
+        computed: {
+            // 计算属性的 getter
+            reversedMessage: function () {
+                // `this` 指向 vm 实例
+                return this.message.split('').reverse().join('')
+            },
+            site: {
+                //getter
+                get:function () {
+                    return this.name + ' ' + this.url
+                },
+                //setter
+                set:function (newValue) {
+                    var names = newValue.split(' ')
+                    this.name = names[0]
+                    this.url = names[names.length - 1]
+                }
+            }
+        },
+        methods: {
+            reversedMessageMethod: function () {
+                return this.message.split('').reverse().join('')
+            }
+        }
+    }
+
+    vm = Vue.createApp(app).mount('#app')
+
+    document.write('name: ' + vm.name)
+    document.write('<br>')
+    document.write('url: ' + vm.url)
+    document.write('<br>----- 更新数据 -----<br>')
+
+    vm.site = '菜鸟教程 http://www.runoob.com'
+    document.write('name: ' + vm.name)
+    document.write('<br>')
+    document.write('url: ' + vm.url)
+</script>
+</body>
+</html>

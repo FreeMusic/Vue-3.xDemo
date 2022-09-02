@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+
+    <div id="app">
+        <p>页面载入时，input元素自动获取焦点</p>
+        <div v-runoob="{ name: '菜鸟教程', url: 'www.runoob.com' }"></div>
+<!--        <input v-focus>-->
+
+<!--        <ul><input v-focus></ul>-->
+        <div v-game="{ text: '菜鸟教程', color: 'red' }"></div>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+
+                }
+            },
+            //注册局部指令
+            // directives: {
+            //     focus: {
+            //         mounted(elem) {
+            //             elem.focus()
+            //         }
+            //     }
+            // }
+        })
+        // app.directive('focus', {
+        //     mounted(elem){
+        //         //聚焦元素
+        //         elem.focus()
+        //     }
+        // })
+        app.directive('runoob', (elem, binding, vnode) => {
+            console.log(binding.value.name)
+            console.log(binding.value.url)
+            var s = JSON.stringify
+            elem.interHTML = s(binding.value)
+        })
+        app.directive('game', (elem, bind, vnode) => {
+            elem.innerHTML = bind.value.text
+            elem.style.backgroundColor = bind.value.color
+        })
+
+        vm = app.mount('#app')
+    </script>
+
+</body>
+</html>

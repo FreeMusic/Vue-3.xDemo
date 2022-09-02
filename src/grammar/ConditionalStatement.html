@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/vue/3.2.36/vue.global.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <p v-if="seen">显示</p>
+        <template v-if="seen1">
+            <h1>网站</h1>
+            <p>GGGGGGGGG</p>
+            <p>RRRRRRRRR</p>
+            <p>TTTTTTTTT</p>
+        </template>
+        <div v-if="num < 1">
+            小于1
+        </div>
+        <div v-else-if="num < 10">
+            小于10大于等于1
+        </div>
+        <div v-else>
+            大于等于10
+        </div>
+        <h1 v-show="showOK">哈哈</h1>
+    </div>
+
+    <script>
+        const app = {
+            data(){
+                return {
+                    seen: true,
+                    seen1: true,
+                    num: 20,
+                    showOK: true,
+                }
+            }
+        }
+        Vue.createApp(app).mount('#app')
+    </script>
+
+</body>
+</html>
